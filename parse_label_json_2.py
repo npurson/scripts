@@ -6,6 +6,7 @@ from tqdm import tqdm
 
 root_dir = '/Users/89378/Downloads/yxs'
 dst_dir = './yx'
+suffix = '.json'
 
 
 def listfile(rootdir):
@@ -16,7 +17,7 @@ def listfile(rootdir):
         if os.path.isdir(path):
             _files.extend(listfile(path))
         if os.path.isfile(path):
-            if os.path.splitext(path)[1] == '.json':
+            if os.path.splitext(path)[1] == suffix:
                 _files.append(path)
     return _files
 
@@ -30,6 +31,17 @@ def is_contain_chinese(string):
 
 def get_substr_idx(string, substr):
     return string.find(substr)
+
+
+def get_label_from_json(json_file):
+    try:
+        jsonFile = json.load(open(json_file,"r"))
+    except json.decoder.JSONDecodeError or IsADirectoryError:
+        return -1
+
+    flags = jsonFile["flags"]
+    label = 0 if flags["INVALID"] == True else 1
+    return label
 
 
 for _ in os.listdir(root_dir):
