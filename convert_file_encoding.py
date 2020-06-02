@@ -1,6 +1,7 @@
 import os
 import sys
 import codecs
+from tqdm import tqdm
 
 s_dir = './1'
 f_type = '.json'
@@ -16,11 +17,11 @@ def writeFile(file,u,encoding):
         f.write(u)
 
 def convert(f):
-    print(f)
     content = readFile(f, input_encoding)
     writeFile(f, content, output_encoding)
 
 files = os.listdir(s_dir)
-for f in files:
+for f in tqdm(files):
     if os.path.splitext(f)[1] == f_type:
         convert(os.path.join(s_dir, f))
+os.system('pause')
