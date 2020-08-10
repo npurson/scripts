@@ -70,7 +70,7 @@ for _ in os.listdir(root_dir):
             print('decode error')
             cnt += 1
             continue
-        
+
         try:
             j = json.load(f)
         except:

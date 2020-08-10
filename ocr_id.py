@@ -5,6 +5,7 @@ from tqdm import tqdm
 from aip import AipOcr
 from collections import defaultdict
 
+
 APP_ID = 'xxxxxxxx'
 API_KEY = 'xxxxxxxx'
 SECRET_KEY = 'xxxxxxxx'
@@ -70,16 +71,15 @@ workbook = xlwt.Workbook(encoding = 'ascii')
 sheet0 = workbook.add_sheet('sheet0')
 sheet1 = workbook.add_sheet('sheet1')
 
-
 for f in tqdm(files):
     try:
         cv2.imread(f)
     except:
         continue
-    
+
     total += 1
     sheet0.write(total, 0, f.split('\\')[-1])
-    
+
     try:
         txt = image2text(ndarray2bytes(get_roi(f)))
     except:
@@ -91,7 +91,7 @@ for f in tqdm(files):
     id = get_id(txt)
     if len(id) == 0:
         continue
-    
+
     sheet0.write(total, 1, id)
     dict[id] += 1
     cnt += 1
@@ -99,7 +99,7 @@ for f in tqdm(files):
     if cnt >= 50:
         break
 
-for (k,v) in dict.items(): 
+for (k,v) in dict.items():
     sheet1.write(cnt1, 0, k)
     sheet1.write(cnt1, 1, v)
     cnt1 += 1

@@ -3,25 +3,30 @@ import sys
 import codecs
 from tqdm import tqdm
 
+
 s_dir = './1'
 f_type = '.json'
 input_encoding = 'gb2312'
 output_encoding = 'utf-8'
 
-def readFile(file, encoding):
+
+def read_file(file, encoding):
     with codecs.open(file, 'r', encoding) as f:
         return f.read()
 
-def writeFile(file,u,encoding):
+
+def write_file(file,u,encoding):
     with codecs.open(file, 'w', encoding) as f:
         f.write(u)
 
+
 def convert(f):
-    content = readFile(f, input_encoding)
-    writeFile(f, content, output_encoding)
+    content = read_file(f, input_encoding)
+    write_file(f, content, output_encoding)
+
 
 files = os.listdir(s_dir)
 for f in tqdm(files):
     if os.path.splitext(f)[1] == f_type:
         convert(os.path.join(s_dir, f))
-os.system('pause')
+# os.system('pause')
