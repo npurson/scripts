@@ -7,7 +7,7 @@
 cp /usr/sbin/$1 /mod/usr/sbin/
 ldd /usr/sbin/$1 > ./dependency.txt
 
-for d in `cat /home/npurson/scripts/dependency.txt`
+for d in `cat ~/scripts/dependency.txt`
 do
         if [ ${d:0:4} == "/lib" ]
         then
